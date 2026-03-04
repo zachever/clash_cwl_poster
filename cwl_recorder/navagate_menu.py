@@ -81,7 +81,8 @@ def record_all_replays(settings: RecordSettings) -> None:
 
                 click_on_screen(*locations["return_home"])
                 wait_for_cwl_menu_to_load()
-                click_on_screen(*locations["close_popup"])
+                if find_location_on_screen("red_x.png"):
+                    click_on_screen(*locations["close_popup"])
             
             click_on_screen(*locations["next_base"])
 
