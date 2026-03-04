@@ -5,7 +5,7 @@ import json
 import cwl_api_info as cwl_api_info
 
 CLAN = "Lethal_Turtles"
-CWL_DATE = "26_FEB"
+CWL_DATE = "26_MAR"
 ONLY_THREE_STARS = True
 
 
@@ -57,30 +57,33 @@ timestamps = []
 current_time = 0.0
 
 with open(file_list_path, "w", encoding="utf-8") as f:
-    for day in range(1, 8):
-        for attack in range(1, 16):
+    try:
+        for day in range(1, 8):
+            for attack in range(1, 16):
 
-            stars = cwl_api_info.get_attack_info(day, attack)["stars"]
-            if ONLY_THREE_STARS and stars < 3:
-                continue
+                stars = cwl_api_info.get_attack_info(day, attack)["stars"]
+                if ONLY_THREE_STARS and stars < 3:
+                    continue
 
-            file_name = f"attack_{attack}.mp4"
-            file_path = os.path.join(videos_dir, f"day_{day}", file_name)
+                file_name = f"attack_{attack}.mp4"
+                file_path = os.path.join(videos_dir, f"day_{day}", file_name)
 
-            if os.path.exists(file_path):
-                safe_path = file_path.replace("\\", "/")
-                f.write(f"file '{safe_path}'\n")
+                if os.path.exists(file_path):
+                    safe_path = file_path.replace("\\", "/")
+                    f.write(f"file '{safe_path}'\n")
 
-                duration = get_duration(file_path)
+                    duration = get_duration(file_path)
 
-                timestamps.append({
-                    "day": day,
-                    "attack": attack,
-                    "start_time_seconds": current_time,
-                    "start_time_formatted": format_timestamp(current_time)
-                })
+                    timestamps.append({
+                        "day": day,
+                        "attack": attack,
+                        "start_time_seconds": current_time,
+                        "start_time_formatted": format_timestamp(current_time)
+                    })
 
-                current_time += duration
+                    current_time += duration
+    except Exception as e:
+        print(f"An error occurred while processing videos, this may be okay if not recording all replays for whole cwl at once: {e}")
 
 output_path = os.path.join(videos_dir, "archive.mp4")
 
