@@ -2,13 +2,24 @@ import os
 import subprocess
 import imageio_ffmpeg
 import json
-import shared.cwl_api_info as cwl_api_info
+import cwl_api_info as cwl_api_info
 
 CLAN = "Lethal_Turtles"
 CWL_DATE = "26_FEB"
+ONLY_THREE_STARS = True
+
 
 directory = os.path.dirname(os.path.abspath(__file__))
-videos_dir = os.path.join(directory, "videos", CLAN, CWL_DATE)
+
+parent_dir = os.path.dirname(directory)
+
+videos_dir = os.path.join(
+    parent_dir,
+    "cwl_recorder",
+    "videos",
+    CLAN,
+    CWL_DATE
+)
 
 ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
 
@@ -48,6 +59,11 @@ current_time = 0.0
 with open(file_list_path, "w", encoding="utf-8") as f:
     for day in range(1, 8):
         for attack in range(1, 16):
+
+            stars = cwl_api_info.get_attack_info(day, attack)["stars"]
+            if ONLY_THREE_STARS and stars < 3:
+                continue
+
             file_name = f"attack_{attack}.mp4"
             file_path = os.path.join(videos_dir, f"day_{day}", file_name)
 
@@ -108,7 +124,8 @@ with open(output_txt_path, "w", encoding="utf-8") as f:
         attacker = attack_info["attacker"]
 
         #line = f"{time_str} - Attack {t['attack']}: {attacker} vs {defender}\n"
-        line = f"{time_str} - {attacker} vs {defender}\n"
+        #line = f"{time_str} - {attacker} vs {defender}\n"
+        line = f"{time_str} - {attacker}\n"
         f.write(line)
 
 print("timestamps.txt created.")
