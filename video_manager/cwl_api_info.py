@@ -2,8 +2,9 @@ import requests
 import os
 import json
 
-CLAN_TAG = "#98C80RGP" #make sure hashtag is elided
-CLAN_NAME = "Lethal_Turtles"
+#CLAN_TAG = "#98C80RGP" #make sure hashtag is elided
+CLAN_TAG = "#2G9U92JYC" #make sure hashtag is elided
+CLAN_NAME = "Turtleing"
 CWL_DATE = "26_MAR"
 
 def better_get(url):

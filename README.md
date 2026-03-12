@@ -10,8 +10,10 @@ python main.py -d 1 -s 1 -p videos/Lethal_Turtles/26_MAR -r _
 
 # Stitching + Creating timestamp txt
 
-1. Open terminal in repo base directory and run:
+1. Update clan tag and names at top of cwl_api_info.py and stitch.py
+2. Open terminal in repo base directory and run:
 ```
 cd video_manager
 python cwl_api_info.py
+python stitch.py
 ```

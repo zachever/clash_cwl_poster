@@ -4,7 +4,8 @@ import imageio_ffmpeg
 import json
 import cwl_api_info as cwl_api_info
 
-CLAN = "Lethal_Turtles"
+#CLAN = "Lethal_Turtles"
+CLAN = "Turtleing"
 CWL_DATE = "26_MAR"
 ONLY_THREE_STARS = True
 
