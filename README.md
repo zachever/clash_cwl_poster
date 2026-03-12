@@ -5,7 +5,12 @@
 3. Open terminal in repo base directory and run:
 ```
 cd cwl_recorder
+
+#specific day change -d 1 to any day number
 python main.py -d 1 -s 1 -p videos/Lethal_Turtles/26_MAR -r _
+
+#all days
+python main.py -s 1 -p videos/Turtleing/26_MAR -r _
 ```
 
 # Stitching + Creating timestamp txt
